@@ -1,0 +1,49 @@
+STEPS
+
+1. Demo App
+2. Get TMDB API Key
+3. Create a react App
+4. Setup firebase hosting
+5. Get all the MOVIES
+6. Build the Rows
+7. Build the Banner
+9. Build the Nav Bar
+10. Add Trailer Popups
+11. Deploy App to firebase
+
+API Key (v3 auth)
+
+fcc1310f0986050039f0a384e52bd006
+
+
+Example API Request
+
+https://api.themoviedb.org/3/movie/550?api_key=fcc1310f0986050039f0a384e52bd006
+
+
+API Read Access Token (v4 auth)
+
+eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmY2MxMzEwZjA5ODYwNTAwMzlmMGEzODRlNTJiZDAwNiIsInN1YiI6IjYzNjEzNDMyODI4OWEwMDA4MWJmMDhkOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.i_FUebF-TAYrLxGMxBwVa7qIuXcYppvNAmXjkle8A_Y
+
+
+
+const requests = {
+       fetchTrending: `/trending/all/week?api_key=${API_Key}&language=en-US`,
+       fetchNetflixOriginals: `/discover/tv?api_key=${API_Key}&with_network=213`,
+       fetchTopRated: `/movie/top_rated?api_key=${API_Key}&language=en=US`,
+       fetchActionMovies: `/discover/movie?api_key=${API_Key}&with_genres=28`,
+       fetchComedyMovies: `/discover/movie?api_key=${API_Key}&with_genres=35`,
+       fetchHorrorMovies: `/discover/movie?api_key=${API_Key}&with_genres=27`,
+       fethRomanceMovies: `/discover/movie?api_key=${API_Key}&with_genres=10749`,
+       fetchDocumentaries: `/discover/movie?api_key=${API_Key}&with_genres=99`
+}
+
+Axios baseURL: "https://api.themoviedb.org/3"
+
+Imdb netflix Image path  "https://image.tmdb.org/t/p/original"
+
+
+install the following below to create youtube Popups
+
+npm i react-youtube
+npm i movie-trailer

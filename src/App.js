@@ -1,25 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
+import React  from 'react'
+import Row from '../src/Row'
+import requests from './Service/Request'
+import Banner from './Components/Banner';
+import NavBar from './Components/NavBar';
 
-function App() {
+let App = () => {
+     // set up Netflix front page row and fetch movie requests, pass title and as props to row.js
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+      <React.Fragment>
+      
+             <div className='app'>
+                 <NavBar/>
+                 <Banner/>
+                 <Row title="NETFLIX ORIGINALS" 
+                 fetchUrl={requests.fetchNetflixOriginals}
+                   isLargeRow={true}
+                  />
+                 <Row title="Trending Now" fetchUrl={requests.fetchTrending}/>
+                 <Row title="Top Rated" fetchUrl={requests.fetchTopRated}/>
+                 <Row title="Action Movies" fetchUrl={requests.fetchActionMovies}/>
+                 <Row title="Comedy Movies" fetchUrl={requests.fetchComedyMovies}/>
+                 <Row title="Horror Movies" fetchUrl={requests.fetchHorrorMovies}/>
+                 <Row title="Romance Movies" fetchUrl={requests.fethRomanceMovies}/>
+                 <Row title="Documentaries" fetchUrl={requests.fetchDocumentaries}/>
+             </div>
+      </React.Fragment>
+  )
 }
 
 export default App;
