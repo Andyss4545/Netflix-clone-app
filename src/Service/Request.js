@@ -1,3 +1,7 @@
+// Get all the API URSls and connect with TMDB API KEY
+
+
+
 const API_Key = "fcc1310f0986050039f0a384e52bd006"
 
 const requests = {

@@ -9,27 +9,29 @@ let base_URL = "https://image.tmdb.org/t/p/original"
 let Row = ({title, fetchUrl, isLargeRow}) => {
       // title, fetchURL , isLargeRow are all props brought from App.js
       const [trailerUrl, seTrailerUrl] = useState("")
-
-      const [movies, setMovies] = useState({
-             films: [],
+       
+      // set the movies state with empty array 
+      const [theMovies, setTheMovies] = useState({
+             movies: [],
              errorMessage: ""
       })
 
-      const {films} = movies
+      const {movies} = theMovies
 
       // A snippet of code which runs on a specific condition
 
 //
       useEffect(() =>{
         let fetchData = async() => {
+          // grab movie data from the api database
               try{
                 const request = await axios.get(fetchUrl)
-                setMovies(() => ({
-                     films: request.data.results
+                setTheMovies(() => ({
+                     movies: request.data.results
                 }))
 
               }catch(error){
-                   setMovies(() => ({
+                   setTheMovies(() => ({
                         errorMessage: error
                    }))
               }
@@ -48,12 +50,12 @@ let Row = ({title, fetchUrl, isLargeRow}) => {
           },
       }
 
-      // set trailer url to play each moviels trailer 
-      const handleClick = (film) => {
+      // set trailer url to play each movies trailer 
+      const handleClick = (movie) => {
              if(trailerUrl){
                 seTrailerUrl("")
              }else{
-                   movieTrailer(film?.title || film?.name || film?.source).then((url) => {
+                   movieTrailer(movie?.title || movie?.name || movie?.source).then((url) => {
                         const urlParams = new URLSearchParams(new URL(url).search)
                         seTrailerUrl(urlParams.get("v"))
                    }).catch((error) => {
@@ -69,14 +71,16 @@ let Row = ({title, fetchUrl, isLargeRow}) => {
                 <h2>{title}</h2>
                  <div className={"row_posters"}>
                         {
-                             films?.length > 0 && films.map((film) => {
+                         // show th length and  map throug movies array to display movies from api
+                             movies?.length > 0 && movies.map((movie) => {
                                   return (
                                         <img 
-                                        onClick={() => handleClick(film)}
-                                        key={film.id} 
+                                        // call the handleClick  function and passed movie parameter in it to click
+                                        onClick={() => handleClick(movie)}
+                                        key={movie.id} 
                                         className={`row_poster ${isLargeRow && "row_posterLarge"}`} 
-                                        src={`${base_URL}${isLargeRow ? film.poster_path : film.backdrop_path}`} 
-                                        alt={film.name} />
+                                        src={`${base_URL}${isLargeRow ? movie.poster_path : movie.backdrop_path}`} 
+                                        alt={movie.name} />
                                   ) 
                              })
                         }

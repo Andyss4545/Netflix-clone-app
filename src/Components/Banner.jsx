@@ -4,12 +4,13 @@ import requests from "../Service/Request";
 import "../Banner.css";
 
 let Banner = () => {
-  const [movie, setMovie] = useState({
-    film: [],
+  // set movie state to emty arrays
+  const [theMovie, setTheMovie] = useState({
+    movie: [],
     errorMessage: "",
   });
 
-  let { film } = movie;
+  let { movie } = theMovie;
 
   // use axiosservice to fetch NetflixOriginals from api requests
   // And get random Netflixorginals movies from request.data.results
@@ -18,15 +19,16 @@ let Banner = () => {
       try {
         let request = await axios.get(requests.fetchNetflixOriginals);
         console.log(request.data.results);
-        setMovie(() => ({
-          film: request.data.results[
-            Math.floor(Math.random() * request.data.results.length - 1)
-          ],
+        setTheMovie(() => ({
+          movie:
+            request.data.results[
+              Math.floor(Math.random() * request.data.results.length - 1)
+            ],
         }));
 
         return request;
       } catch (error) {
-        setMovie(() => ({
+        setTheMovie(() => ({
           errorMessage: error,
         }));
       }
@@ -49,13 +51,13 @@ let Banner = () => {
         className="banner"
         style={{
           background: "cover",
-          backgroundImage: `url("https://image.tmdb.org/t/p/original${film?.backdrop_path}")`,
+          backgroundImage: `url("https://image.tmdb.org/t/p/original${movie?.backdrop_path}")`,
           backgroundPosition: "center center",
         }}
       >
         <div className="banner_contents">
           <h2 className="banner_title">
-            {film?.title || film?.name || film?.original_name}
+            {movie?.title || movie?.name || movie?.original_name}
           </h2>
 
           <div className="banner_buttons">
@@ -64,7 +66,7 @@ let Banner = () => {
           </div>
 
           <h1 className="banner_description">
-            {truncate(film?.overview, 150)}
+            {truncate(movie?.overview, 150)}
           </h1>
         </div>
         <div className="banner_fadeBottom"></div>
